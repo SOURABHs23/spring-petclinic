@@ -1,0 +1,111 @@
+{
+	"info": {
+		"_postman_id": "b5fae534-1234-5678-9101-abcdef123456",
+		"name": "Spring PetClinic - Feature Flags",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List All Feature Flags",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/flags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"flags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Feature Flag (POST)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"key\": \"new-feature-key\",\n    \"enabled\": true,\n    \"description\": \"A brand new feature\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/flags",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"flags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Feature Flag (PUT)",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"enabled\": false,\n    \"description\": \"Updated description\"\n}"
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/flags/add-new-pet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"flags",
+						"add-new-pet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Feature Flag",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/api/flags/add-new-pet",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"flags",
+						"add-new-pet"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

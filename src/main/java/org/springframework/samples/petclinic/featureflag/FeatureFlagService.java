@@ -19,13 +19,26 @@ public class FeatureFlagService {
 	@Transactional(readOnly = true)
 	public boolean isEnabled(String key) {
 		return repository.findByKey(key)
-			.map(FeatureFlag::isEnabled)
-			.orElse(false); // fail-safe
+				.map(FeatureFlag::isEnabled)
+				.orElse(false); // fail-safe
 	}
 
 	@Transactional
 	public FeatureFlag save(FeatureFlag flag) {
 		return repository.save(flag);
+	}
+
+	@Transactional
+	public FeatureFlag updateByKey(String key, FeatureFlag incoming) {
+		return repository.findByKey(key)
+				.map(existing -> {
+					existing.setEnabled(incoming.isEnabled());
+					if (incoming.getDescription() != null) {
+						existing.setDescription(incoming.getDescription());
+					}
+					return repository.save(existing);
+				})
+				.orElseThrow(() -> new IllegalArgumentException("Feature flag with key '" + key + "' not found"));
 	}
 
 	@Transactional(readOnly = true)
@@ -36,6 +49,6 @@ public class FeatureFlagService {
 	@Transactional
 	public void deleteByKey(String key) {
 		repository.findByKey(key)
-			.ifPresent(repository::delete);
+				.ifPresent(repository::delete);
 	}
 }

@@ -16,8 +16,13 @@ public class FeatureFlagController {
 	}
 
 	@PostMapping
-	public FeatureFlag createOrUpdate(@RequestBody FeatureFlag flag) {
+	public FeatureFlag create(@RequestBody FeatureFlag flag) {
 		return service.save(flag);
+	}
+
+	@PutMapping("/{key}")
+	public FeatureFlag update(@PathVariable String key, @RequestBody FeatureFlag flag) {
+		return service.updateByKey(key, flag);
 	}
 
 	@GetMapping
