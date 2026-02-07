@@ -1,0 +1,174 @@
+{
+  "info": {
+    "_postman_id": "2e663a3a-50b9-4cda-9ed9-c6a649d70833",
+    "name": "Spring PetClinic - Feature Flags",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "7635977"
+  },
+  "item": [
+    {
+      "name": "List All Feature Flags",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/flags",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flags"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Create Feature Flag (POST)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"key\": \"new-feature-key\",\n    \"enabled\": true,\n    \"description\": \"A brand new feature\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/flags",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flags"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "add-new-pet",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"enabled\": false\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/flags/add-new-pet",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flags",
+            "add-new-pet"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "owner-search",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"enabled\": false\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/flags/owner-search",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flags",
+            "owner-search"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "add-visit",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n    \"enabled\": false\n}"
+        },
+        "url": {
+          "raw": "http://localhost:8080/api/flags/add-visit",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flags",
+            "add-visit"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Feature Flag",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:8080/api/flags/add-new-pet",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "8080",
+          "path": [
+            "api",
+            "flags",
+            "add-new-pet"
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}

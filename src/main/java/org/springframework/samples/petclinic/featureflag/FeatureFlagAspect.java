@@ -1,10 +1,8 @@
 package org.springframework.samples.petclinic.featureflag;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-import org.springframework.samples.petclinic.featureflag.FeatureToggle;
-import org.springframework.samples.petclinic.featureflag.FeatureFlagService;
 
 @Aspect
 @Component
@@ -16,17 +14,14 @@ public class FeatureFlagAspect {
 		this.service = service;
 	}
 
-	@Around("@annotation(featureToggle)")
-	public Object checkFeature(ProceedingJoinPoint joinPoint,
-							   FeatureToggle featureToggle) throws Throwable {
+	@Before("@annotation(featureToggle)")
+	public void checkFeature(FeatureToggle featureToggle) {
 
 		String key = featureToggle.value();
 
 		if (!service.isEnabled(key)) {
 			throw new FeatureDisabledException(key);
 		}
-
-		return joinPoint.proceed();
 	}
 
 }
