@@ -21,6 +21,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.samples.petclinic.featureflag.FeatureToggle;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -103,6 +104,7 @@ class PetController {
 	}
 
 	@PostMapping("/pets/new")
+	@FeatureToggle("add-new-pet")
 	public String processCreationForm(Owner owner, @Valid Pet pet, BindingResult result,
 			RedirectAttributes redirectAttributes) {
 
@@ -159,8 +161,9 @@ class PetController {
 
 	/**
 	 * Updates the pet details if it exists or adds a new pet to the owner.
+	 *
 	 * @param owner The owner of the pet
-	 * @param pet The pet with updated details
+	 * @param pet   The pet with updated details
 	 */
 	private void updatePetDetails(Owner owner, Pet pet) {
 		Integer id = pet.getId();
@@ -171,8 +174,7 @@ class PetController {
 			existingPet.setName(pet.getName());
 			existingPet.setBirthDate(pet.getBirthDate());
 			existingPet.setType(pet.getType());
-		}
-		else {
+		} else {
 			owner.addPet(pet);
 		}
 		this.owners.save(owner);

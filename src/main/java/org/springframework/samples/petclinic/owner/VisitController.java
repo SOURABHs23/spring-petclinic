@@ -19,6 +19,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.samples.petclinic.featureflag.FeatureToggle;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,9 +54,12 @@ class VisitController {
 	}
 
 	/**
-	 * Called before each and every @RequestMapping annotated method. 2 goals: - Make sure
-	 * we always have fresh data - Since we do not use the session scope, make sure that
+	 * Called before each and every @RequestMapping annotated method. 2 goals: -
+	 * Make sure
+	 * we always have fresh data - Since we do not use the session scope, make sure
+	 * that
 	 * Pet object always has an id (Even though id is not part of the form fields)
+	 *
 	 * @param petId
 	 * @return Pet
 	 */
@@ -89,6 +93,7 @@ class VisitController {
 	// Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is
 	// called
 	@PostMapping("/owners/{ownerId}/pets/{petId}/visits/new")
+	@FeatureToggle("add-visit")
 	public String processNewVisitForm(@ModelAttribute Owner owner, @PathVariable int petId, @Valid Visit visit,
 			BindingResult result, RedirectAttributes redirectAttributes) {
 		if (result.hasErrors()) {
